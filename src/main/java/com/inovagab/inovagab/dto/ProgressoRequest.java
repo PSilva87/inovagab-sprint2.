@@ -1,0 +1,1 @@
+package com.inovagab.inovagab.dto; import jakarta.validation.constraints.*; public class ProgressoRequest { @Min(0) @Max(100) private int progresso; public int getProgresso(){return progresso;} public void setProgresso(int v){progresso=v;} }

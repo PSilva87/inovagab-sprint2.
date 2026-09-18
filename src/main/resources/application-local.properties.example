@@ -1,0 +1,2 @@
+# Copie este arquivo como application-local.properties e informe uma chave JWT Base64 com pelo menos 32 bytes.
+jwt.secret=SUA_CHAVE_JWT_LOCAL_EM_BASE64

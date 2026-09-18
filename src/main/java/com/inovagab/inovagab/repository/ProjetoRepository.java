@@ -1,0 +1,1 @@
+package com.inovagab.inovagab.repository; import com.inovagab.inovagab.model.Projeto; import org.springframework.data.mongodb.repository.MongoRepository; public interface ProjetoRepository extends MongoRepository<Projeto,String>{}

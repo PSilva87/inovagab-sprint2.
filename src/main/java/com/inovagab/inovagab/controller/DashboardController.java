@@ -1,0 +1,2 @@
+package com.inovagab.inovagab.controller; import com.inovagab.inovagab.dto.DashboardResponse; import com.inovagab.inovagab.service.DashboardService; import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/dashboard") public class DashboardController {private final DashboardService service; public DashboardController(DashboardService service){this.service=service;} @GetMapping public DashboardResponse resumo(){return service.resumo();}}

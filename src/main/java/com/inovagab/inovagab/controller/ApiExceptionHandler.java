@@ -1,0 +1,2 @@
+package com.inovagab.inovagab.controller; import org.springframework.http.*; import org.springframework.web.bind.annotation.*; import java.util.Map;
+@RestControllerAdvice public class ApiExceptionHandler { @ExceptionHandler(IllegalArgumentException.class) public ResponseEntity<Map<String,Object>> regra(IllegalArgumentException e){return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("status",404,"mensagem",e.getMessage()));} }

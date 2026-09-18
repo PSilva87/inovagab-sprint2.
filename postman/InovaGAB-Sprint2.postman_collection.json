@@ -1,0 +1,44 @@
+{
+  "info": {
+    "name": "InovaGAB - Sprint 2",
+    "description": "Coleção organizada. Execute os três logins; os tokens e IDs das criações são salvos automaticamente.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key":"baseUrl","value":"http://localhost:8080"},
+    {"key":"liderToken","value":""},
+    {"key":"gestorToken","value":""},
+    {"key":"operadorToken","value":""},
+    {"key":"estrategiaId","value":""},
+    {"key":"ideiaId","value":""},
+    {"key":"projetoId","value":""}
+  ],
+  "item": [
+    {"name":"1. Login - Líder","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('liderToken', body.token);","pm.test('Login do líder retornou token', () => pm.expect(body.token).to.be.a('string')); "]}}],"request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"email\": \"lider@inovagab.com\",\n  \"senha\": \"123456\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"2. Login - Gestor","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('gestorToken', body.token);","pm.test('Login do gestor retornou token', () => pm.expect(body.token).to.be.a('string')); "]}}],"request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"email\": \"gestor@inovagab.com\",\n  \"senha\": \"123456\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"3. Login - Operador","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('operadorToken', body.token);","pm.test('Login do operador retornou token', () => pm.expect(body.token).to.be.a('string')); "]}}],"request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"email\": \"operador@inovagab.com\",\n  \"senha\": \"123456\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"0. Comunicação - API ativa","request":{"method":"GET","header":[],"url":"{{baseUrl}}/api/health"}},
+    {"name":"0. Comunicação - rota protegida","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{operadorToken}}"}],"url":"{{baseUrl}}/api/teste-protegido"}},
+    {"name":"Estratégias","item":[
+      {"name":"Criar estratégia","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('estrategiaId', body.id);","pm.test('Estratégia criada', () => pm.response.to.have.status(201));"]}}],"request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"titulo\": \"Transformação Digital\",\n  \"descricao\": \"Ampliar tecnologia nos processos\",\n  \"categoria\": \"TECNOLOGIA\",\n  \"campanha\": \"Inovação 2026\",\n  \"ativa\": true\n}"},"url":"{{baseUrl}}/api/estrategias"}},
+      {"name":"Listar estratégias","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{operadorToken}}"}],"url":"{{baseUrl}}/api/estrategias"}},
+      {"name":"Atualizar estratégia","request":{"method":"PUT","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"titulo\": \"Transformação Digital\",\n  \"descricao\": \"Ampliar a tecnologia e automatizar processos\",\n  \"categoria\": \"TECNOLOGIA\",\n  \"campanha\": \"Inovação 2026 - Atualizada\",\n  \"ativa\": true\n}"},"url":"{{baseUrl}}/api/estrategias/{{estrategiaId}}"}},
+      {"name":"Histórico da estratégia","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"}],"url":"{{baseUrl}}/api/estrategias/{{estrategiaId}}/historico"}}
+    ]},
+    {"name":"Ideias","item":[
+      {"name":"Criar ideia","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('ideiaId', body.id);","pm.test('Ideia criada', () => pm.response.to.have.status(201));"]}}],"request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{operadorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"titulo\": \"Automação de relatórios\",\n  \"descricao\": \"Automatizar a geração de relatórios operacionais\",\n  \"estrategiaId\": \"{{estrategiaId}}\"\n}"},"url":"{{baseUrl}}/api/ideias"}},
+      {"name":"Minhas ideias","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{operadorToken}}"}],"url":"{{baseUrl}}/api/ideias/minhas"}},
+      {"name":"Priorizar ideia","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{gestorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"prioridade\": \"ALTA\",\n  \"pontuacao\": 90\n}"},"url":"{{baseUrl}}/api/ideias/{{ideiaId}}/priorizacao"}},
+      {"name":"Aprovar ideia","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{gestorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"aprovada\": true\n}"},"url":"{{baseUrl}}/api/ideias/{{ideiaId}}/aprovacao"}}
+    ]},
+    {"name":"Projetos","item":[
+      {"name":"Criar projeto","event":[{"listen":"test","script":{"type":"text/javascript","exec":["const body = pm.response.json();","pm.collectionVariables.set('projetoId', body.id);","pm.test('Projeto criado', () => pm.response.to.have.status(201));"]}}],"request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{gestorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"nome\": \"Portal de Inovação\",\n  \"descricao\": \"Portal para gestão de ideias\",\n  \"estrategiaId\": \"{{estrategiaId}}\",\n  \"investimento\": 50000,\n  \"prazo\": \"2026-12-31\"\n}"},"url":"{{baseUrl}}/api/projetos"}},
+      {"name":"Atualizar progresso","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{gestorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"progresso\": 50\n}"},"url":"{{baseUrl}}/api/projetos/{{projetoId}}/progresso"}},
+      {"name":"Adicionar resultados do projeto","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{gestorToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","options":{"raw":{"language":"json"}},"raw":"{\n  \"resultados\": \"Redução de 20% no tempo de consolidação dos relatórios.\",\n  \"retornoFinanceiro\": 75000\n}"},"url":"{{baseUrl}}/api/projetos/{{projetoId}}/resultados"}},
+      {"name":"Listar projetos","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"}],"url":"{{baseUrl}}/api/projetos"}}
+    ]},
+    {"name":"Dashboard - Líder","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"}],"url":"{{baseUrl}}/api/dashboard"}},
+    {"name":"Auditoria - Líder","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"}],"url":"{{baseUrl}}/api/auditoria"}},
+    {"name":"Métricas - Líder","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{liderToken}}"}],"url":"{{baseUrl}}/api/metricas"}}
+  ]
+}
