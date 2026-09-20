@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Theme.InovaGAB" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/brand_navy</item>
+        <item name="colorPrimaryDark">@color/brand_navy</item>
+        <item name="colorAccent">@color/brand_sky</item>
+        <item name="android:navigationBarColor">@color/brand_navy</item>
+        <item name="android:fontFamily">sans</item>
+    </style>
+
+</resources>

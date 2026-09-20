@@ -267,8 +267,42 @@ src/main/java/com/inovagab/inovagab
 └── service            # Regras de negócio
 ```
 
-## Próximas etapas
+## Aplicativo Android
 
-- Integrar o aplicativo Android aos endpoints protegidos por JWT.
-- Produzir evidências visuais dos testes para a apresentação.
-- Preparar a apresentação, APK e pacote final de entrega.
+O aplicativo Android está na pasta `mobile/` e consome a API Spring Boot por JWT.
+
+Principais fluxos validados no aplicativo:
+
+- login de operador, gestor e líder;
+- cadastro e consulta de estratégias;
+- cadastro e aprovação de ideias;
+- cadastro e consulta de projetos;
+- dashboard de liderança com indicadores;
+- seleção de estratégia pelo nome, sem exigir que o usuário informe IDs;
+- navegação por seta de retorno nas telas internas.
+
+### Executar no Android Studio
+
+1. Abra a pasta `mobile/` no Android Studio.
+2. Inicie a API em `http://localhost:8080`.
+3. Execute o aplicativo em um emulador Android.
+
+No emulador, a API é acessada por `http://10.0.2.2:8080/api/`. Para usar um celular físico, atualize o endereço no arquivo `mobile/app/src/main/java/br/com/fiap/inovagab/ApiClient.kt` para o IP local do computador que estiver executando a API.
+
+### Gerar APK
+
+No Android Studio, use **Build > Generate App Bundles or APKs > Generate APKs**. O arquivo de depuração é gerado em:
+
+```text
+mobile/app/build/outputs/apk/debug/app-debug.apk
+```
+
+> O APK não é versionado no Git para manter o repositório leve. A versão gerada e validada localmente pode ser entregue junto com o projeto.
+
+## Status da Sprint
+
+- API REST, autenticação, permissões e auditoria: concluídos.
+- Testes unitários: 8 de 8 aprovados.
+- Testes de comunicação via Postman: concluídos.
+- Aplicativo Android integrado e validado nos três perfis: concluído.
+- Interface visual inspirada no contexto de mobilidade e inovação: concluída.

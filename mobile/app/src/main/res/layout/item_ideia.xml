@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/bg_card"
+    android:elevation="2dp">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/brand_navy" />
+
+    <TextView
+        android:id="@+id/txtDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/brand_ink"
+        android:layout_marginTop="8dp" />
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/brand_blue"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/btnAprovar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aprovar"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_green"
+        android:layout_marginTop="12dp"/>
+    <Button
+        android:id="@+id/btnExcluir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Excluir"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_danger"
+        android:layout_marginTop="12dp"/>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_navy">#003B70</color>
+    <color name="brand_blue">#0067B1</color>
+    <color name="brand_sky">#159FE0</color>
+    <color name="brand_green">#138A4A</color>
+    <color name="brand_surface">#F3F7FA</color>
+    <color name="brand_card">#FFFFFFFF</color>
+    <color name="brand_ink">#17324D</color>
+    <color name="brand_muted">#5D6B78</color>
+    <color name="brand_danger">#BD3030</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

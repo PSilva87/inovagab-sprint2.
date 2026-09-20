@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/brand_surface">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar Ideia"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/brand_navy"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/editTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título da ideia"
+        android:inputType="textCapSentences"
+        android:textLocale="pt-BR"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/editDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:minLines="4"
+        android:gravity="top"
+        android:inputType="textCapSentences|textMultiLine"
+        android:textLocale="pt-BR"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estratégia vinculada"
+        android:textColor="@color/brand_muted"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <Spinner
+        android:id="@+id/spinnerEstrategia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SALVAR IDEIA"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_blue" />
+
+</LinearLayout>
