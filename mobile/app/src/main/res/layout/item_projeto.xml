@@ -38,4 +38,31 @@
         android:textColor="@color/brand_ink"
         android:layout_marginTop="8dp"/>
 
+    <Button
+        android:id="@+id/btnAtualizarProgresso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Atualizar progresso"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_blue" />
+
+    <Button
+        android:id="@+id/btnRegistrarResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Registrar resultado"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_green" />
+
+    <Button
+        android:id="@+id/btnExcluirProjeto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Excluir projeto"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brand_danger" />
+
 </LinearLayout>

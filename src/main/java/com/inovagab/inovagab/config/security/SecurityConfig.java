@@ -53,7 +53,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/projetos").hasRole("GESTOR")
                         .requestMatchers(HttpMethod.PUT, "/api/projetos/**").hasRole("GESTOR")
                         .requestMatchers(HttpMethod.PATCH, "/api/projetos/**").hasRole("GESTOR")
-                        .requestMatchers(HttpMethod.GET, "/api/projetos/**").hasRole("LIDER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/projetos/**").hasRole("GESTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/projetos/**").hasAnyRole("GESTOR", "LIDER")
 
                         .requestMatchers(HttpMethod.GET, "/api/dashboard/**").hasRole("LIDER")
                         .requestMatchers(HttpMethod.GET, "/api/auditoria").hasRole("LIDER")

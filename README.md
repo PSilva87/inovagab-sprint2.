@@ -173,10 +173,11 @@ Status possíveis de uma ideia: `PENDENTE`, `PRIORIZADA`, `APROVADA` e `REJEITAD
 | Método | Rota | Acesso | Descrição |
 | --- | --- | --- | --- |
 | POST | `/api/projetos` | Gestor | Cria um projeto. |
-| GET | `/api/projetos` | Líder | Lista projetos. |
+| GET | `/api/projetos` | Gestor e Líder | Lista projetos e seus dados de acompanhamento. |
 | PUT | `/api/projetos/{id}` | Gestor | Atualiza os dados do projeto. |
 | PATCH | `/api/projetos/{id}/progresso` | Gestor | Atualiza o progresso entre 0 e 100. |
 | PATCH | `/api/projetos/{id}/resultados` | Gestor | Registra resultados e retorno financeiro. |
+| DELETE | `/api/projetos/{id}` | Gestor | Remove um projeto. |
 
 Exemplo de criação:
 
@@ -211,11 +212,13 @@ Exemplo para registrar resultados:
 
 | Método | Rota | Acesso | Descrição |
 | --- | --- | --- | --- |
-| GET | `/api/dashboard` | Líder | Exibe totais de estratégias, ideias, projetos e indicadores financeiros. |
+| GET | `/api/dashboard` | Líder | Exibe totais, investimento, retorno, lucro, ROI e resumo financeiro por estratégia. |
 | GET | `/api/auditoria` | Líder | Lista registros de ações relevantes em ordem decrescente de data. |
 | GET | `/api/metricas` | Líder | Retorna total de auditorias, ações nas últimas 24 horas e agrupamento por entidade. |
 
 As ações de criação, atualização, exclusão, priorização, aprovação e registro de resultados geram registros de auditoria automaticamente.
+
+O dashboard calcula `lucroTotal` (retorno menos investimento) e `roiPercentual`. Também retorna `resultadosPorEstrategia`, com o total de projetos, investimento, retorno, lucro e ROI de cada estratégia, permitindo que o aplicativo apresente análises gerais e específicas.
 
 ## Validações e respostas de erro
 

@@ -118,6 +118,95 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESULTADOS DOS PROJETOS"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/brand_blue"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:elevation="2dp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/txtProjetos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Projetos acompanhados: 0"
+                android:textStyle="bold"
+                android:textColor="@color/brand_navy"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/txtInvestimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Investimento: R$ 0,00"
+                android:textColor="@color/brand_ink"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/txtRetornoFinanceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Retorno financeiro: R$ 0,00"
+                android:textColor="@color/brand_green"
+                android:textStyle="bold"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/txtLucro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Lucro obtido: R$ 0,00"
+                android:textColor="@color/brand_green"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/txtRoi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="ROI geral: 0,00%"
+                android:textColor="@color/brand_blue"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <ProgressBar
+                android:id="@+id/barraRoi"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/brand_green" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtResumoEstrategias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:elevation="2dp"
+            android:padding="16dp"
+            android:text="Ainda não há resultados financeiros por estratégia."
+            android:textColor="@color/brand_ink"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
         <Button
             android:id="@+id/btnEstrategia"
             android:layout_width="match_parent"

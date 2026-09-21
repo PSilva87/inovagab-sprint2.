@@ -21,6 +21,9 @@ class HomeGestorActivity : AppCompatActivity() {
         val btnEstrategias =
             findViewById<Button>(R.id.btnEstrategias)
 
+        val btnGerenciarProjetos =
+            findViewById<Button>(R.id.btnGerenciarProjetos)
+
         btnProjeto.setOnClickListener {
 
             startActivity(
@@ -47,6 +50,16 @@ class HomeGestorActivity : AppCompatActivity() {
                 Intent(
                     this,
                     ListaEstrategiasActivity::class.java
+                )
+            )
+        }
+
+        btnGerenciarProjetos.setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this,
+                    ListaProjetosActivity::class.java
                 )
             )
         }
