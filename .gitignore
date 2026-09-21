@@ -33,3 +33,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Arquivos gerados pelo Android
+mobile/app/release/
+*.apk
+*.dm
