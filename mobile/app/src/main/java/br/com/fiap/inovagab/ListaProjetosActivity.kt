@@ -58,13 +58,15 @@ class ListaProjetosActivity : AppCompatActivity() {
         val formulario = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(48, 0, 48, 0) }
         val resultado = EditText(this).apply { hint = "Resultado obtido" }
         val retorno = EditText(this).apply { hint = "Retorno financeiro (ex.: 15000)"; inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL }
-        formulario.addView(resultado); formulario.addView(retorno)
+        val produtividade = EditText(this).apply { hint = "Aumento de produtividade (%)"; inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL }
+        formulario.addView(resultado); formulario.addView(retorno); formulario.addView(produtividade)
         AlertDialog.Builder(this).setTitle("Registrar resultado").setMessage(projeto.nome).setView(formulario)
             .setNegativeButton("Cancelar", null).setPositiveButton("Salvar") { _, _ ->
                 val valor = retorno.text.toString().replace(',', '.').toDoubleOrNull()
-                if (resultado.text.isBlank() || valor == null || valor < 0) Toast.makeText(this, "Preencha o resultado e um retorno válido.", Toast.LENGTH_LONG).show()
+                val aumento = produtividade.text.toString().replace(',', '.').toDoubleOrNull()
+                if (resultado.text.isBlank() || valor == null || valor < 0 || aumento == null || aumento < 0) Toast.makeText(this, "Preencha o resultado, retorno e produtividade com valores válidos.", Toast.LENGTH_LONG).show()
                 else {
-                    val corpo = JSONObject().put("resultados", resultado.text.toString()).put("retornoFinanceiro", valor)
+                    val corpo = JSONObject().put("resultados", resultado.text.toString()).put("retornoFinanceiro", valor).put("aumentoProdutividade", aumento)
                     ApiClient.request("PATCH", "projetos/${projeto.id}/resultados", sessao.token(), corpo, {
                         Toast.makeText(this, "Resultado registrado!", Toast.LENGTH_SHORT).show(); carregarProjetos()
                     }, { Toast.makeText(this, "Não foi possível registrar: $it", Toast.LENGTH_LONG).show() })

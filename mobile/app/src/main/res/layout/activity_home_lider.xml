@@ -193,7 +193,98 @@
                 android:max="100"
                 android:progress="0"
                 android:progressTint="@color/brand_green" />
+
+            <TextView
+                android:id="@+id/txtProdutividade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Produtividade média: 0,00%"
+                android:textColor="@color/brand_blue"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <ProgressBar
+                android:id="@+id/barraProdutividade"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/brand_blue" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COMPARATIVO FINANCEIRO"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/brand_blue"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:elevation="2dp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/txtGraficoInvestimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Investimento  R$ 0,00"
+                android:textColor="@color/brand_ink"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+
+            <ProgressBar
+                android:id="@+id/barraInvestimento"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/brand_navy" />
+
+            <TextView
+                android:id="@+id/txtGraficoRetorno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Retorno  R$ 0,00"
+                android:textColor="@color/brand_green"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+
+            <ProgressBar
+                android:id="@+id/barraRetorno"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/brand_green" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtCalendarioExterno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card"
+            android:elevation="2dp"
+            android:padding="16dp"
+            android:text="Calendário externo&#10;Consultando próximos feriados nacionais..."
+            android:textColor="@color/brand_ink"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/txtResumoEstrategias"

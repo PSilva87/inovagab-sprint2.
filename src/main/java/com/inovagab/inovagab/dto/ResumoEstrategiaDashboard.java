@@ -7,5 +7,6 @@ public record ResumoEstrategiaDashboard(
         double investimentoTotal,
         double retornoFinanceiroTotal,
         double lucroTotal,
-        double roiPercentual) {
+        double roiPercentual,
+        double produtividadeMedia) {
 }

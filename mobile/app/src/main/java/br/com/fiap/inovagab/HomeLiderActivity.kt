@@ -47,6 +47,27 @@ class HomeLiderActivity : AppCompatActivity() {
         val barraRoi =
             findViewById<ProgressBar>(R.id.barraRoi)
 
+        val txtProdutividade =
+            findViewById<TextView>(R.id.txtProdutividade)
+
+        val barraProdutividade =
+            findViewById<ProgressBar>(R.id.barraProdutividade)
+
+        val txtGraficoInvestimento =
+            findViewById<TextView>(R.id.txtGraficoInvestimento)
+
+        val txtGraficoRetorno =
+            findViewById<TextView>(R.id.txtGraficoRetorno)
+
+        val barraInvestimento =
+            findViewById<ProgressBar>(R.id.barraInvestimento)
+
+        val barraRetorno =
+            findViewById<ProgressBar>(R.id.barraRetorno)
+
+        val txtCalendarioExterno =
+            findViewById<TextView>(R.id.txtCalendarioExterno)
+
         val txtResumoEstrategias =
             findViewById<TextView>(R.id.txtResumoEstrategias)
 
@@ -94,6 +115,24 @@ class HomeLiderActivity : AppCompatActivity() {
             txtLucro.text = "Lucro obtido: ${moeda(dashboard.optDouble("lucroTotal"))}"
             txtRoi.text = "ROI geral: ${String.format(Locale("pt", "BR"), "%.2f", dashboard.optDouble("roiPercentual"))}%"
             barraRoi.progress = dashboard.optDouble("roiPercentual").coerceIn(0.0, 100.0).toInt()
+            val produtividade = dashboard.optDouble("produtividadeMedia")
+            txtProdutividade.text = "Produtividade média: ${String.format(Locale("pt", "BR"), "%.2f", produtividade)}%"
+            barraProdutividade.progress = produtividade.coerceIn(0.0, 100.0).toInt()
+
+            val investimento = dashboard.optDouble("investimentoTotal")
+            val retorno = dashboard.optDouble("retornoFinanceiroTotal")
+            val maiorValor = maxOf(investimento, retorno, 1.0)
+            txtGraficoInvestimento.text = "Investimento  ${moeda(investimento)}"
+            txtGraficoRetorno.text = "Retorno  ${moeda(retorno)}"
+            barraInvestimento.progress = ((investimento / maiorValor) * 100).toInt()
+            barraRetorno.progress = ((retorno / maiorValor) * 100).toInt()
+
+            val feriado = dashboard.optJSONObject("proximoFeriadoNacional")
+            txtCalendarioExterno.text = if (feriado == null) {
+                "Calendário externo\nNão foi possível consultar os feriados neste momento."
+            } else {
+                "Calendário externo: próximo feriado\n${dataBrasileira(feriado.optString("data"))} — ${feriado.optString("nome")}"
+            }
 
             val resultados = dashboard.optJSONObject("resultadosPorEstrategia")
             val resumo = StringBuilder()
@@ -104,7 +143,8 @@ class HomeLiderActivity : AppCompatActivity() {
                     val item = resultados.optJSONObject(chaves.next()) ?: continue
                     resumo.append("• ${item.optString("estrategiaTitulo")}: ")
                     resumo.append("${moeda(item.optDouble("retornoFinanceiroTotal"))} | ")
-                    resumo.append("ROI ${String.format(Locale("pt", "BR"), "%.2f", item.optDouble("roiPercentual"))}%\n")
+                    resumo.append("ROI ${String.format(Locale("pt", "BR"), "%.2f", item.optDouble("roiPercentual"))}% | ")
+                    resumo.append("Prod. ${String.format(Locale("pt", "BR"), "%.2f", item.optDouble("produtividadeMedia"))}%\n")
                 }
             } else {
                 resumo.append("Ainda não há resultados financeiros por estratégia.")
@@ -115,6 +155,9 @@ class HomeLiderActivity : AppCompatActivity() {
 
     private fun moeda(valor: Double): String =
         String.format(Locale("pt", "BR"), "R$ %,.2f", valor)
+
+    private fun dataBrasileira(data: String): String =
+        if (data.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) "${data.substring(8, 10)}/${data.substring(5, 7)}/${data.substring(0, 4)}" else data
 
     override fun onSupportNavigateUp(): Boolean {
         finish()

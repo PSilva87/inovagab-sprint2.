@@ -10,6 +10,8 @@ public record DashboardResponse(
         double retornoFinanceiroTotal,
         double lucroTotal,
         double roiPercentual,
+        double produtividadeMedia,
+        FeriadoResponse proximoFeriadoNacional,
         Map<String, Long> projetosPorStatus,
         Map<String, ResumoEstrategiaDashboard> resultadosPorEstrategia) {
 }

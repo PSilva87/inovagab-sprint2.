@@ -19,11 +19,14 @@ public class DashboardService {
     private final EstrategiaRepository estrategias;
     private final IdeiaRepository ideias;
     private final ProjetoRepository projetos;
+    private final CalendarioFeriadosService calendarioFeriados;
 
-    public DashboardService(EstrategiaRepository estrategias, IdeiaRepository ideias, ProjetoRepository projetos) {
+    public DashboardService(EstrategiaRepository estrategias, IdeiaRepository ideias, ProjetoRepository projetos,
+                            CalendarioFeriadosService calendarioFeriados) {
         this.estrategias = estrategias;
         this.ideias = ideias;
         this.projetos = projetos;
+        this.calendarioFeriados = calendarioFeriados;
     }
 
     public DashboardResponse resumo() {
@@ -32,6 +35,10 @@ public class DashboardService {
         double investimentoTotal = listaProjetos.stream().mapToDouble(Projeto::getInvestimento).sum();
         double retornoTotal = listaProjetos.stream().mapToDouble(Projeto::getRetornoFinanceiro).sum();
         double lucroTotal = retornoTotal - investimentoTotal;
+        double produtividadeMedia = listaProjetos.stream()
+                .mapToDouble(Projeto::getAumentoProdutividade)
+                .average()
+                .orElse(0);
 
         Map<String, String> titulosPorEstrategia = estrategias.findAll().stream()
                 .collect(Collectors.toMap(e -> e.getId(), e -> e.getTitulo(), (primeiro, segundo) -> primeiro));
@@ -53,6 +60,8 @@ public class DashboardService {
                 retornoTotal,
                 lucroTotal,
                 calcularRoi(lucroTotal, investimentoTotal),
+                arredondar(produtividadeMedia),
+                calendarioFeriados.proximoFeriadoNacional().orElse(null),
                 listaProjetos.stream().collect(Collectors.groupingBy(Projeto::getStatus, Collectors.counting())),
                 resultadosPorEstrategia);
     }
@@ -61,11 +70,20 @@ public class DashboardService {
         double investimento = projetosDaEstrategia.stream().mapToDouble(Projeto::getInvestimento).sum();
         double retorno = projetosDaEstrategia.stream().mapToDouble(Projeto::getRetornoFinanceiro).sum();
         double lucro = retorno - investimento;
+        double produtividadeMedia = projetosDaEstrategia.stream()
+                .mapToDouble(Projeto::getAumentoProdutividade)
+                .average()
+                .orElse(0);
         return new ResumoEstrategiaDashboard(
-                estrategiaId, titulo, projetosDaEstrategia.size(), investimento, retorno, lucro, calcularRoi(lucro, investimento));
+                estrategiaId, titulo, projetosDaEstrategia.size(), investimento, retorno, lucro,
+                calcularRoi(lucro, investimento), arredondar(produtividadeMedia));
     }
 
     private double calcularRoi(double lucro, double investimento) {
         return investimento == 0 ? 0 : Math.round((lucro / investimento) * 10000.0) / 100.0;
+    }
+
+    private double arredondar(double valor) {
+        return Math.round(valor * 100.0) / 100.0;
     }
 }

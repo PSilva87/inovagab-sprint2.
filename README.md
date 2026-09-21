@@ -218,7 +218,15 @@ Exemplo para registrar resultados:
 
 As ações de criação, atualização, exclusão, priorização, aprovação e registro de resultados geram registros de auditoria automaticamente.
 
-O dashboard calcula `lucroTotal` (retorno menos investimento) e `roiPercentual`. Também retorna `resultadosPorEstrategia`, com o total de projetos, investimento, retorno, lucro e ROI de cada estratégia, permitindo que o aplicativo apresente análises gerais e específicas.
+O dashboard calcula `lucroTotal` (retorno menos investimento), `roiPercentual` e `produtividadeMedia`. Também retorna `resultadosPorEstrategia`, com o total de projetos, investimento, retorno, lucro, ROI e produtividade de cada estratégia, permitindo que o aplicativo apresente análises gerais e específicas.
+
+## Serviço externo: calendário de feriados
+
+O dashboard consome a API pública da BrasilAPI para identificar o próximo feriado nacional do ano e apoiar o planejamento de prazos dos projetos.
+
+- Serviço consultado: `GET https://brasilapi.com.br/api/feriados/v1/{ano}`
+- Campo retornado no dashboard: `proximoFeriadoNacional` (`data`, `nome` e `tipo`)
+- Se o serviço externo estiver indisponível, o dashboard mantém os indicadores internos e retorna esse campo como `null`.
 
 ## Validações e respostas de erro
 
