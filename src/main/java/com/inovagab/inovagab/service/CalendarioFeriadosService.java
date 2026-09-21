@@ -12,11 +12,7 @@ import java.util.Optional;
 
 @Service
 public class CalendarioFeriadosService {
-    private final RestClient brasilApi;
-
-    public CalendarioFeriadosService(RestClient.Builder builder) {
-        this.brasilApi = builder.baseUrl("https://brasilapi.com.br/api").build();
-    }
+    private final RestClient brasilApi = RestClient.create("https://brasilapi.com.br/api");
 
     public Optional<FeriadoResponse> proximoFeriadoNacional() {
         LocalDate hoje = LocalDate.now();
