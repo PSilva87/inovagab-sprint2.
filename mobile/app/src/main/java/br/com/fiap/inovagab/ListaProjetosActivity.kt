@@ -36,7 +36,7 @@ class ListaProjetosActivity : AppCompatActivity() {
             val array = JSONArray(response)
             for (i in 0 until array.length()) {
                 val item = array.getJSONObject(i)
-                lista.add(Projeto(item.optString("id"), item.optString("nome"), item.optString("status"), item.optDouble("investimento"), item.optDouble("retornoFinanceiro"), item.optInt("progresso")))
+                lista.add(Projeto(item.optString("id"), item.optString("nome"), item.optString("status"), item.optDouble("investimento"), item.optDouble("retornoFinanceiro"), item.optInt("progresso"), item.optString("prazo")))
             }
             adapter.notifyDataSetChanged()
         }, onError = { Toast.makeText(this, "Erro ao buscar projetos: $it", Toast.LENGTH_LONG).show() })

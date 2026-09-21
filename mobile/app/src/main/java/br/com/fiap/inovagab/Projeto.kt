@@ -7,6 +7,7 @@ data class Projeto(
     var status: String = "",
     var investimento: Double = 0.0,
     var retornoFinanceiro: Double = 0.0,
-    var progresso: Int = 0
+    var progresso: Int = 0,
+    var prazo: String = ""
 
 )

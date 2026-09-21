@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ProjetoAdapter(
     private val lista: List<Projeto>,
@@ -35,7 +37,8 @@ class ProjetoAdapter(
         holder.txtNome.text = projeto.nome
         holder.txtStatus.text = "Status: ${projeto.status}"
         holder.txtInvestimento.text = "Investimento: R$ ${"%.2f".format(projeto.investimento)}"
-        holder.txtRetorno.text = "Retorno: R$ ${"%.2f".format(projeto.retornoFinanceiro)} | Progresso: ${projeto.progresso}%"
+        val prazoFormatado = try { LocalDate.parse(projeto.prazo).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) } catch (_: Exception) { projeto.prazo.ifBlank { "Não informado" } }
+        holder.txtRetorno.text = "Retorno: R$ ${"%.2f".format(projeto.retornoFinanceiro)} | Progresso: ${projeto.progresso}%\nPrazo: $prazoFormatado"
 
         val podeGerenciar = perfil == "GESTOR"
         holder.btnAtualizarProgresso.visibility = if (podeGerenciar) View.VISIBLE else View.GONE

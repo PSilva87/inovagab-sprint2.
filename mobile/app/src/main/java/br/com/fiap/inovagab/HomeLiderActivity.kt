@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ProgressBar
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -16,6 +18,7 @@ class HomeLiderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home_lider)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val txtTotal =
             findViewById<TextView>(R.id.txtTotal)
@@ -112,4 +115,12 @@ class HomeLiderActivity : AppCompatActivity() {
 
     private fun moeda(valor: Double): String =
         String.format(Locale("pt", "BR"), "R$ %,.2f", valor)
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean { menuInflater.inflate(R.menu.menu_sessao, menu); return true }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { if (item.itemId == R.id.menuSair) { encerrarSessao(); return true }; return super.onOptionsItemSelected(item) }
 }
